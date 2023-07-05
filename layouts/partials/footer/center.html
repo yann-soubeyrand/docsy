@@ -1,0 +1,13 @@
+{{ with .Site.Params.copyright -}}
+	<span>&copy; {{ with .year -}}{{- . -}}{{- else -}}{{- now.Year -}}{{- end }} {{ with .title -}}{{- . -}}{{- end }} {{ T "footer_all_rights_reserved" }}</span>
+{{- else }}
+	{{ with .Site.Copyright }}{{ . | safeHTML }}{{ end }}
+{{- end }}
+{{ with .Site.Params.privacy_policy -}}
+<span class="ms-1"><a href="{{ . }}" target="_blank" rel="noopener">{{ T "footer_privacy_policy" }}</a></span>
+{{- end }}
+{{ if not .Site.Params.ui.footer_about_disable -}}
+{{ with .Site.GetPage "about" -}}
+	<p class="td-footer__about mt-2"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+{{- end -}}
+{{ end }}
